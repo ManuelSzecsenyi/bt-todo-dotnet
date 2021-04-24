@@ -4,6 +4,7 @@
              x:Class="todoXamarinForms.MainPage"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              xmlns:viewmodels="clr-namespace:todoXamarinForms"
+             xmlns:extensions="clr-namespace:todoXamarinForms.Extensions"
              ios:Page.UseSafeArea="true"
              x:DataType="viewmodels:MainViewModel">
     <ContentPage.BindingContext>
@@ -92,8 +93,28 @@
         </Grid>
 
 
-        <Label Grid.Row="1"
-               Text="Another Label" />
+        <ListView Grid.Row="1" 
+                  ItemsSource="{Binding TodoList}"
+                  Margin="20, 0"
+                  SeparatorVisibility="None"
+                  SeparatorColor="Transparent"
+                  RowHeight="70">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame BackgroundColor="#F6F6F6" Padding="10, 20" Margin="0,5" CornerRadius="8" HasShadow="False">
+                            <FlexLayout AlignItems="Center">
+                                <Image Margin="0, 0, 15, 0" 
+                                       Source="{extensions:ImageResource todoXamarinForms.Images.item-unchecked.png}" 
+                                       HeightRequest="15" 
+                                       WidthRequest="15" />
+                                <Label Text="Sauber machen" />
+                            </FlexLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <Frame Grid.Row="2" BackgroundColor="#698C99" Padding="24" CornerRadius="10" HasShadow="False">
             <FlexLayout>
@@ -101,7 +122,13 @@
                        FlexLayout.Grow="1"
                        PlaceholderColor="#E1E8EB"
                        BackgroundColor="Transparent"
-                       TextColor="White"/>
+                       TextColor="White"
+                       HeightRequest="25"/>
+                
+                <Image Margin="10, 0, 0, 0" 
+                       Source="{extensions:ImageResource todoXamarinForms.Images.save-btn.png}" 
+                       HeightRequest="25" 
+                       WidthRequest="25" />
             </FlexLayout>
         </Frame>
 
