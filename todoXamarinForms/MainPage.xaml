@@ -3,11 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="todoXamarinForms.MainPage"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
-             ios:Page.UseSafeArea="true">
+             xmlns:viewmodels="clr-namespace:todoXamarinForms"
+             ios:Page.UseSafeArea="true"
+             x:DataType="viewmodels:MainViewModel">
+    <ContentPage.BindingContext>
+        <viewmodels:MainViewModel/>
+    </ContentPage.BindingContext>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
@@ -17,7 +22,9 @@
 
         <Grid Grid.Row="0" Padding="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -73,6 +80,15 @@
                                VerticalOptions="Center" />
                 </Frame>
             </StackLayout>
+
+            <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalOptions="End"
+                    Text="{Binding CurrentDate}"
+                    FontSize="Title"
+                    FontAttributes="Bold" />
+            <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" VerticalOptions="End"
+                   Text="Meine Aufgaben"
+                   FontSize="Medium"
+                   FontAttributes="Bold" />
         </Grid>
 
 
@@ -80,7 +96,13 @@
                Text="Another Label" />
 
         <Frame Grid.Row="2" BackgroundColor="#698C99" Padding="24" CornerRadius="10" HasShadow="False">
-            <Label Text="Welcome to ios.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            <FlexLayout>
+                <Entry Placeholder="Eine Aufgabe hinzufügen" 
+                       FlexLayout.Grow="1"
+                       PlaceholderColor="#E1E8EB"
+                       BackgroundColor="Transparent"
+                       TextColor="White"/>
+            </FlexLayout>
         </Frame>
 
     </Grid>
