@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="todoXamarinForms.MainPage">
+
+    <FlexLayout Direction="Column"
+                AlignItems="Center"
+                JustifyContent="SpaceEvenly">
+        <ContentView>
+            <FlexLayout Direction="Row"
+                    AlignItems="Center"
+                    JustifyContent="SpaceBetween"
+                    Margin="20">
+                
+                <!-- Button at top -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="10" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="10" />
+                    </Grid.ColumnDefinitions>
+
+                    <Ellipse Grid.Column="1" Grid.Row="0" 
+                         Fill="Black"
+                         WidthRequest="10"
+                         HeightRequest="10"/>
+                    <Ellipse Grid.Column="0" Grid.Row="0" 
+                         Fill="Black"
+                         WidthRequest="10"
+                         HeightRequest="10"/>
+                    <Ellipse Grid.Column="0" Grid.Row="1" 
+                         Fill="Black"
+                         WidthRequest="10"
+                         HeightRequest="10"/>
+                    <Ellipse Grid.Column="1" Grid.Row="1" 
+                         Fill="Black"
+                         WidthRequest="10"
+                         HeightRequest="10"/>
+                </Grid>
+                
+                <Label Text="ToDo"
+                       FontSize="Large"
+                       FontAttributes="Bold" />
+
+                <!-- Image -->
+                <StackLayout>
+                    <Frame CornerRadius="20" 
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           HorizontalOptions="Center"
+                           Padding="0"
+                           IsClippedToBounds="True"
+                           HasShadow="false">
+
+                        <Image Source="https://images.unsplash.com/photo-1549150712-1d243024db80" 
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
+                </StackLayout>
+            </FlexLayout>
+            
+       </ContentView>
+
+                <Button Text="Do-Nothing Button" />
+
+        <Label Text="Another Label" />
+
+        <Frame BackgroundColor="#698C99" Padding="24" CornerRadius="10" HasShadow="False">
+            <Label Text="Welcome to ios.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+    </FlexLayout>
+    
+    <!--<StackLayout>
+        <Frame BackgroundColor="DeepPink" Padding="24" CornerRadius="0">
+            <Label Text="Welcome to ios.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
+        <Label FontSize="16" Padding="30,24,30,0">
+            <Label.FormattedText>
+                <FormattedString>
+                    <FormattedString.Spans>
+                        <Span Text="Learn more at "/>
+                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
+                    </FormattedString.Spans>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </StackLayout>
+    
+    -->
+
+</ContentPage>
