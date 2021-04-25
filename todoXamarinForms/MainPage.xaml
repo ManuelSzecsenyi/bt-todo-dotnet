@@ -6,11 +6,17 @@
              xmlns:viewmodels="clr-namespace:todoXamarinForms"
              xmlns:extensions="clr-namespace:todoXamarinForms.Extensions" 
              xmlns:models="clr-namespace:todoXamarinForms.Models"
+             xmlns:converter="clr-namespace:todoXamarinForms.Converters"
              ios:Page.UseSafeArea="true"
              x:DataType="viewmodels:MainViewModel">
     <ContentPage.BindingContext>
         <viewmodels:MainViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BoolToDecorationConverter x:Key="BoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -110,7 +116,7 @@
                                        Source="{extensions:ImageResource todoXamarinForms.Images.item-unchecked.png}" 
                                        HeightRequest="15" 
                                        WidthRequest="15" />
-                                <Label Text="{Binding Text}" />
+                                <Label Text="{Binding Text}" TextDecorations="{Binding Done, Converter={StaticResource BoolConverter}}" />
                             </FlexLayout>
                         </Frame>
                     </ViewCell>
