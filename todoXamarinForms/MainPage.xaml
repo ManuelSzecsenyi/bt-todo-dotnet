@@ -106,11 +106,15 @@
                   Margin="20, 0"
                   SeparatorVisibility="None"
                   SeparatorColor="Transparent"
-                  RowHeight="80">
+                  RowHeight="80"
+                  >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:TodoItem">
                     <ViewCell>
                         <Frame BackgroundColor="#F6F6F6" Padding="10, 20" Margin="0, 10" CornerRadius="8" HasShadow="False">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TapCommand}" />
+                            </Frame.GestureRecognizers>
                             <FlexLayout AlignItems="Center">
                                 <Image Margin="0, 0, 15, 0" 
                                        Source="{extensions:ImageResource todoXamarinForms.Images.item-unchecked.png}" 

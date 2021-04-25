@@ -33,7 +33,23 @@ namespace todoXamarinForms
             set { tapCommand = value; }
         }
 
+        private TodoItem selectedTodoItem;
 
+        public TodoItem SelectedTodoItem
+        {
+            get { return selectedTodoItem; }
+            set { 
+                
+                if(selectedTodoItem != value)
+                {
+                    selectedTodoItem = value;
+                    OnPropertyChanged(nameof(SelectedTodoItem));
+                    updateTodo(selectedTodoItem);
+                }
+            }
+        }
+
+        
 
         public MainViewModel()
         {
@@ -78,6 +94,11 @@ namespace todoXamarinForms
             string content = await result.Content.ReadAsStringAsync();
             Console.WriteLine(content);
 
+        }
+
+        private void updateTodo(TodoItem selectedTodoItem)
+        {
+            Console.WriteLine(selectedTodoItem);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace todoXamarinForms.Models
@@ -12,6 +13,13 @@ namespace todoXamarinForms.Models
         private bool done;
         private string text;
         private DateTime createdAt;
+        private ICommand tapCommand;
+
+        public ICommand TapCommand
+        {
+            get { return tapCommand; }
+            set { tapCommand = value; }
+        }
 
         public string Text
         {
@@ -48,6 +56,12 @@ namespace todoXamarinForms.Models
             Done = done;
             Id = id;
             CreatedAt = createdAt;
+            this.TapCommand = new Command(ToggleDone);
+        }
+
+        public void ToggleDone()
+        {
+            this.Done = !this.Done;
         }
     }
 }
