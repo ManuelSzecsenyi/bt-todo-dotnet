@@ -4,7 +4,8 @@
              x:Class="todoXamarinForms.MainPage"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
              xmlns:viewmodels="clr-namespace:todoXamarinForms"
-             xmlns:extensions="clr-namespace:todoXamarinForms.Extensions"
+             xmlns:extensions="clr-namespace:todoXamarinForms.Extensions" 
+             xmlns:models="clr-namespace:todoXamarinForms.Models"
              ios:Page.UseSafeArea="true"
              x:DataType="viewmodels:MainViewModel">
     <ContentPage.BindingContext>
@@ -93,14 +94,15 @@
         </Grid>
 
 
-        <ListView Grid.Row="1" 
+        <ListView x:Name="MyList"
+                  Grid.Row="1" 
                   ItemsSource="{Binding TodoList}"
                   Margin="20, 0"
                   SeparatorVisibility="None"
                   SeparatorColor="Transparent"
                   RowHeight="80">
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="models:TodoItem">
                     <ViewCell>
                         <Frame BackgroundColor="#F6F6F6" Padding="10, 20" Margin="0, 10" CornerRadius="8" HasShadow="False">
                             <FlexLayout AlignItems="Center">
@@ -108,7 +110,7 @@
                                        Source="{extensions:ImageResource todoXamarinForms.Images.item-unchecked.png}" 
                                        HeightRequest="15" 
                                        WidthRequest="15" />
-                                <Label Text="Aufgaben machen" />
+                                <Label Text="{Binding Text}" />
                             </FlexLayout>
                         </Frame>
                     </ViewCell>

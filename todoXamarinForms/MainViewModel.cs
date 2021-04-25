@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Windows.Input;
@@ -12,7 +14,7 @@ namespace todoXamarinForms
 {
     public class MainViewModel : BindableObject, INotifyPropertyChanged
     {
-
+        private string URL = "https://radiant-spire-08360.herokuapp.com/";
         public string CurrentDate { get; set; }
         public string Entry { get => entry; set
             {
@@ -36,24 +38,46 @@ namespace todoXamarinForms
         public MainViewModel()
         {
             this.CurrentDate = DateTime.Now.ToString("ddd dd.MM.yy");
-            this.TapCommand = new Command(onButtonClicked);
+            this.TapCommand = new Command(OnButtonClicked);
 
             this.TodoList = new ObservableCollection<TodoItem>();
-
-            this.TodoList.Add(new TodoItem("Sauber machen", false));
-            this.TodoList.Add(new TodoItem("Sauber Nummer zwei", false));
+            this.GetItems();
         }
 
-        public void onButtonClicked()
+        public void OnButtonClicked()
         {
             string todoText = this.Entry;
             if(todoText == "") { return; }
-            this.TodoList.Add(new TodoItem(
-                todoText,
-                false
-            ));
 
+            TodoItem newItem = new TodoItem(todoText, false, Guid.NewGuid().ToString(), DateTime.Now);
+            this.TodoList.Add(newItem);
+            this.PutItem(newItem);
             this.Entry = "";
+        }
+
+        private async void GetItems()
+        {
+            HttpClient client = new HttpClient();
+            var result = await client.GetAsync(this.URL);
+            string content = await result.Content.ReadAsStringAsync();
+
+            List<TodoItem> todoItems = JsonConvert.DeserializeObject<List<TodoItem>>(content);
+
+            foreach(TodoItem item in todoItems){
+                this.TodoList.Add(item);
+            }
+        }
+
+        private async void PutItem(TodoItem item)
+        {
+            string serializedItem = JsonConvert.SerializeObject(item);
+
+            HttpClient client = new HttpClient();
+            var result = await client.PostAsync(this.URL, new StringContent(serializedItem, Encoding.UTF8, "application/json"));
+
+            string content = await result.Content.ReadAsStringAsync();
+            Console.WriteLine(content);
+
         }
     }
 }
