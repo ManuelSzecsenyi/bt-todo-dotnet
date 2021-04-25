@@ -98,17 +98,17 @@
                   Margin="20, 0"
                   SeparatorVisibility="None"
                   SeparatorColor="Transparent"
-                  RowHeight="70">
+                  RowHeight="80">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Frame BackgroundColor="#F6F6F6" Padding="10, 20" Margin="0,5" CornerRadius="8" HasShadow="False">
+                        <Frame BackgroundColor="#F6F6F6" Padding="10, 20" Margin="0, 10" CornerRadius="8" HasShadow="False">
                             <FlexLayout AlignItems="Center">
                                 <Image Margin="0, 0, 15, 0" 
                                        Source="{extensions:ImageResource todoXamarinForms.Images.item-unchecked.png}" 
                                        HeightRequest="15" 
                                        WidthRequest="15" />
-                                <Label Text="Sauber machen" />
+                                <Label Text="Aufgaben machen" />
                             </FlexLayout>
                         </Frame>
                     </ViewCell>
@@ -116,19 +116,26 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Frame Grid.Row="2" BackgroundColor="#698C99" Padding="24" CornerRadius="10" HasShadow="False">
+        <Frame Grid.Row="2" BackgroundColor="#698C99" Padding="20, 20, 20, 0" Margin="0, 0, 0, -80" CornerRadius="10" HasShadow="False">
             <FlexLayout>
-                <Entry Placeholder="Eine Aufgabe hinzufügen" 
+                <Entry Text="{Binding Entry}"
+                       Placeholder="Eine Aufgabe hinzufügen" 
                        FlexLayout.Grow="1"
                        PlaceholderColor="#E1E8EB"
                        BackgroundColor="Transparent"
                        TextColor="White"
                        HeightRequest="25"/>
-                
+
                 <Image Margin="10, 0, 0, 0" 
                        Source="{extensions:ImageResource todoXamarinForms.Images.save-btn.png}" 
                        HeightRequest="25" 
-                       WidthRequest="25" />
+                       WidthRequest="25">
+
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding TapCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
             </FlexLayout>
         </Frame>
 
