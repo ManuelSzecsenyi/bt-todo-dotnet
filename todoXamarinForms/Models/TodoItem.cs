@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Net.Http;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -59,9 +61,18 @@ namespace todoXamarinForms.Models
             this.TapCommand = new Command(ToggleDone);
         }
 
-        public void ToggleDone()
+        public async void ToggleDone()
         {
             this.Done = !this.Done;
+
+            // TODO put this into a service
+            string serializedItem = JsonConvert.SerializeObject(this);
+
+            HttpClient client = new HttpClient();
+            var result = await client.PutAsync("https://radiant-spire-08360.herokuapp.com/", new StringContent(serializedItem, Encoding.UTF8));
+
+            string content = await result.Content.ReadAsStringAsync();
+            Console.WriteLine(content);
         }
     }
 }
